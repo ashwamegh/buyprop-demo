@@ -2,6 +2,8 @@
 
 > Solutions for the challenges posted here: https://github.com/rajivkr/challenge
 
+## [Goto Demo Site](https://ashwamegh.github.io/buyprop-demo/)
+
 ## How to Run
 1. Clone the project, using `git clone https://github.com/ashwamegh/buyprop-demo.git`
 2. Go to the project directory using `cd buyprop-demo`
