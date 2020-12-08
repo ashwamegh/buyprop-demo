@@ -16,11 +16,13 @@ export const Header = styled.header`
 `
 
 export const Button = styled.button`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	border: 1px solid #f5f5f5;
 	height: 36px;
 	min-width: 44%;
 	max-width: 150px;
-	margin: 0.5em;
 	padding: 0.3em 0.5em;
 	background-color: #fff;
 	color: #0b5989;

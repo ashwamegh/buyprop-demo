@@ -9,12 +9,6 @@ import {
 import Button from './../components/buttons';
 import comments from './../comments/data';
 
-const buttons = [
-	{
-		fontIcon: "fa-temp",
-		buttonText: "count"
-	}
-]
 
 function getCommentsCount(code) {
 	let commentSize = 0;
@@ -33,7 +27,7 @@ const Post = ({ code, caption, likes, id, display_src }) => {
 					to={{
 						pathname: `/comments/${code}`,
 						state: {
-							post: code
+							postId: code
 						}
 					}}
 				>
@@ -54,12 +48,18 @@ const Post = ({ code, caption, likes, id, display_src }) => {
 							fontIcon={"💙"}
 							buttonText={likes}
 							title="Like"
+							style={{
+								margin: '0.5em 0.5em 0.5em 0'
+							}}
 						>
 						</Button>
 						<Button
 							fontIcon={'💬'}
 							buttonText={ getCommentsCount(code) }
 							title="Comment"
+							style={{
+								margin: '0.5em 0.5em 0.5em 0'
+							}}
 						>
 						</Button>
 					</PostActions>
