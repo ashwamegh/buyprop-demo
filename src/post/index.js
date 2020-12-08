@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
 	PostActions,
 	PostCard,
@@ -25,8 +25,11 @@ function getCommentsCount(code) {
 function Post ({ code, caption, likes, id, display_src }) {
 
 	const [showLikeStatus, setShowLikeStatus] = useState(false);
+	const [postLikes, setPostLikes] = useState(likes);
+	let history = useHistory();
 
 	function handlePostLike() {
+		setPostLikes(postLikes + 1);
 		setShowLikeStatus(true);
 		setTimeout(() => {
 			setShowLikeStatus(false);
@@ -56,7 +59,7 @@ function Post ({ code, caption, likes, id, display_src }) {
 						{showLikeStatus && 
 							<LikeOverlay>
 								<LikeAnimatedIcon>
-									<LikeCount>{ likes }</LikeCount>
+									<LikeCount>{ postLikes }</LikeCount>
 								</LikeAnimatedIcon>
 							</LikeOverlay>
 						}
@@ -69,7 +72,7 @@ function Post ({ code, caption, likes, id, display_src }) {
 					<PostActions>
 						<Button
 							fontIcon={"💙"}
-							buttonText={likes}
+							buttonText={postLikes}
 							title="Like"
 							onClick={handlePostLike}
 							style={{
@@ -84,6 +87,14 @@ function Post ({ code, caption, likes, id, display_src }) {
 							style={{
 								margin: '0.5em 0.5em 0.5em 0'
 							}}
+							onClick={
+								() => history.push({
+									pathname: `/comments/${code}`,
+									state: {
+										postId: code
+									}
+								})
+							}
 						>
 						</Button>
 					</PostActions>

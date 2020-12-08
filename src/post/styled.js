@@ -6,6 +6,7 @@ export const PostCard = styled(ColumnFlex)`
 	margin: 0.5% 1.5%;
 	${'' /* box-shadow: 2px 2px 5px 5px #eee; */}
 	border: 4px solid #f1f1f1;
+	padding-bottom: 2em;
 	cursor: pointer;
 
 	@media only screen and (min-width: 1502px) {
@@ -31,6 +32,7 @@ export const PostCard = styled(ColumnFlex)`
 	@media only screen and (max-width: 512px) {
 		width: 90%;
 		margin: 4% 2%;
+		min-height: 350px;
 	}
 `
 

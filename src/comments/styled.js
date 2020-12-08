@@ -3,7 +3,7 @@ import { ColumnFlex, RowFlex, Button as StyledButton } from './../common-styled'
 import { LikeCount, LikeAnimatedIcon } from './../post/styled'
 
 export const PageWrapper = styled.div`
-	padding: 4em 0;
+	padding: 0 0 4em 0;
 
 	@media only screen and (max-width: 768px) {
 		padding: 2em 0;
@@ -107,6 +107,12 @@ export const CommentText = styled.span`
 	color: #595c5b;
 	font-weight: 500;
 	font-size: 0.9em;
+`
+
+export const CommentForm = styled.form`
+	display: flex;
+	flex-flow: column;
+	width: 100%;
 `
 
 export const CommentInput = styled.input`

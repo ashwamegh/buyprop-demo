@@ -3,8 +3,8 @@ import Button from './../components/buttons';
 import styled from 'styled-components';
 import { RowFlex } from '../common-styled';
 import Header from './../components/header';
-import comments from './data';
-import posts from './../allposts/data';
+import commentsData from './data';
+import postsData from './../allposts/data';
 import {
 	PostDetails,
 	PostImage,
@@ -15,6 +15,7 @@ import {
 	CommentsWrapper,
 	CommentAuthor,
 	CommentText,
+	CommentForm,
 	CommentInput,
 	PageWrapper,
 	ModifiedLikeAnimatedIcon as LikeAnimatedIcon,
@@ -22,32 +23,16 @@ import {
 } from './styled';
 import { LikeOverlay } from './../post/styled'
 
-function getCommentsCount(code) {
-	let commentSize = 0;
-	try {
-		commentSize = comments[code].length;
-	} catch (error) {
-	}
-	return commentSize;
-}
 
-function getPostComments(code) {
-	let data;
-	try {
-		data = JSON.parse(comments)[code];
-	} catch (error) {
-		data = comments[code];
-	}
-	if(!data) {
-		return [];
-	}
-	return data;
-}
 
 function Comments({ location: { state: { postId = null }}}) {
+	const [posts, setPosts] = useState(postsData);
+	const [comments, setComments] = useState(commentsData);
 	const [postComments, setPostComments] = useState([]);
 	const [postData, setPostData] = useState({});
 	const [showLikeStatus, setShowLikeStatus] = useState(false);
+	const [commentAuthor, setCommentAuthor] = useState('');
+	const [newComment, setNewComment] = useState('');
 
 	useEffect(() => {
 		if(postId) {
@@ -56,11 +41,51 @@ function Comments({ location: { state: { postId = null }}}) {
 		}
 	}, [])
 
+
+	function getCommentsCount(code) {
+		let commentSize = 0;
+		try {
+			commentSize = comments[code].length;
+		} catch (error) {
+		}
+		return commentSize;
+	}
+	
+	function getPostComments(code) {
+		let data;
+		try {
+			data = JSON.parse(comments)[code];
+		} catch (error) {
+			data = comments[code];
+		}
+		if(!data) {
+			return [];
+		}
+		return data;
+	}
+
 	function handlePostLike() {
+		const postIndex = posts.findIndex((post) => post.code === postId);
+		posts[postIndex].likes += 1;
 		setShowLikeStatus(true);
 		setTimeout(() => {
 			setShowLikeStatus(false);
 		}, 1000);
+	}
+
+	function handleNewComment(e) {
+		e.preventDefault();
+
+		if(!commentAuthor || !newComment) {
+			return alert('Please fill the required fields');
+		}
+
+		setPostComments([...postComments, {
+			user: commentAuthor,
+			text: newComment
+		}]);
+		setCommentAuthor('');
+		setNewComment('');
 	}
 
 	if(!postId) {
@@ -126,8 +151,23 @@ function Comments({ location: { state: { postId = null }}}) {
 							</CommentText>
 						</CommentsWrapper>)
 					}
-					<CommentInput type="text" placeholder="Author"></CommentInput>
-					<CommentInput placeholder="Comment"></CommentInput>
+					<CommentForm onSubmit={handleNewComment}>
+						<CommentInput
+							type="text"
+							required
+							placeholder="Author"
+							onChange={(e) => setCommentAuthor(e.target.value)}
+							value={commentAuthor}
+						></CommentInput>
+						<CommentInput
+							required
+							placeholder="Comment"
+							type="text"
+							onChange={(e) => setNewComment(e.target.value)}
+							value={newComment}
+						></CommentInput>
+						<button type="submit" style={{ visibility: 'hidden' }}>Submit</button>
+					</CommentForm>
 				</CommentsDetail>
 			</PostCommentsContainer>
 		</PageWrapper>
