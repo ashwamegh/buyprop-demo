@@ -17,7 +17,6 @@ function getPosts() {
 	try {
 		data = JSON.parse(posts);
 	} catch (error) {
-		console.log("IN catch block");
 		return posts;
 	}
 	return data;

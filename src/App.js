@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import './App.css';
 import AllPosts from './allposts';
+import Comments from './comments';
 
 function App() {
 	return (
 		<Router>
 			<Switch>
-				<Route path="/post">
-					<AllPosts></AllPosts>
+				<Route path="/comments/:id" component={ Comments }>
 				</Route>
 				<Route path="/">
 				<AllPosts></AllPosts>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 import {
 	PostActions,
 	PostCard,
@@ -20,7 +21,6 @@ function getCommentsCount(code) {
 	try {
 		commentSize = comments[code].length;
 	} catch (error) {
-		console.log("no comments for", code);
 	}
 	return commentSize;
 }
@@ -29,13 +29,22 @@ const Post = ({ code, caption, likes, id, display_src }) => {
 	return (
 		<>
 			<PostCard>
-				<PostThumb
-					src={ display_src }
-					alt="Post thumbnail"
-					width={'100%'}
-					height={'auto'}
+				<Link
+					to={{
+						pathname: `/comments/${code}`,
+						state: {
+							post: code
+						}
+					}}
 				>
-				</PostThumb>
+					<PostThumb
+						src={ display_src }
+						alt="Post thumbnail"
+						width={'100%'}
+						height={'auto'}
+					>
+					</PostThumb>
+				</Link>
 				<PostDescription>
 					<p>
 						{ caption }
