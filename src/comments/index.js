@@ -16,8 +16,11 @@ import {
 	CommentAuthor,
 	CommentText,
 	CommentInput,
-	PageWrapper
+	PageWrapper,
+	ModifiedLikeAnimatedIcon as LikeAnimatedIcon,
+	ModifiedLikeCount as LikeCount
 } from './styled';
+import { LikeOverlay } from './../post/styled'
 
 function getCommentsCount(code) {
 	let commentSize = 0;
@@ -44,6 +47,7 @@ function getPostComments(code) {
 function Comments({ location: { state: { postId = null }}}) {
 	const [postComments, setPostComments] = useState([]);
 	const [postData, setPostData] = useState({});
+	const [showLikeStatus, setShowLikeStatus] = useState(false);
 
 	useEffect(() => {
 		if(postId) {
@@ -51,6 +55,13 @@ function Comments({ location: { state: { postId = null }}}) {
 			setPostComments(getPostComments(postId));
 		}
 	}, [])
+
+	function handlePostLike() {
+		setShowLikeStatus(true);
+		setTimeout(() => {
+			setShowLikeStatus(false);
+		}, 1000);
+	}
 
 	if(!postId) {
 		return alert("Post id not found");
@@ -61,7 +72,19 @@ function Comments({ location: { state: { postId = null }}}) {
 			<Header></Header>
 			<PostCommentsContainer>
 				<PostDetails>
-					<PostImage src={postData.display_src}></PostImage>
+					<div style={{ position: 'relative', width: '100%' }}>
+						<PostImage
+							src={postData.display_src}
+							onDoubleClick={handlePostLike}
+						></PostImage>
+						{showLikeStatus && 
+							<LikeOverlay>
+								<LikeAnimatedIcon>
+									<LikeCount>{ postData.likes }</LikeCount>
+								</LikeAnimatedIcon>
+							</LikeOverlay>
+						}
+					</div>
 					<PostDescription>
 						<p>
 							{ postData.caption }
@@ -71,6 +94,7 @@ function Comments({ location: { state: { postId = null }}}) {
 								fontIcon={"💙"}
 								buttonText={postData.likes}
 								title="Like"
+								onClick={handlePostLike}
 								style={{
 									boxShadow: '1px 1px 2px 2px #eee',
 									margin: '0.5em 0.5em 0.5em 0'

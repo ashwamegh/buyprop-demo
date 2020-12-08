@@ -61,6 +61,8 @@ export const LikeAnimatedIcon = styled.div`
 	bottom: 0;
 	left: 0;
 	opacity: 0.9;
+	animation-name: like;
+	animation-duration: 1s;
 
 	&:before {
 		content: "";
@@ -83,6 +85,18 @@ export const LikeAnimatedIcon = styled.div`
 		top: 0px;
 		left: 50px;
 	}
+
+	@keyframes like {
+		0% {
+			transform: scale(1) rotate(-135deg);
+		}
+		50% {
+			transform: scale(0.6) rotate(-135deg);
+		}
+		100% {
+			transform: scale(1) rotate(-135deg);
+		}
+	}
 `
 
 export const LikeCount = styled.span`
@@ -94,6 +108,7 @@ export const LikeCount = styled.span`
 	text-align: center;
 	font-size: 3em;
 	font-weight: 500;
+	color: #025686;
 `
 
 export const PostDescription = styled(ColumnFlex)`

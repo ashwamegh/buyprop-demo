@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ColumnFlex, RowFlex, Button as StyledButton } from './../common-styled';
+import { LikeCount, LikeAnimatedIcon } from './../post/styled'
 
 export const PageWrapper = styled.div`
 	padding: 4em 0;
@@ -114,4 +115,27 @@ export const CommentInput = styled.input`
 	padding: 0.8em 0.4em 0.8em 0;
 	border-bottom: 1px solid #eee;
 	color: #595c5b;
+`
+
+export const ModifiedLikeAnimatedIcon = styled(LikeAnimatedIcon)`
+	height: 150px;
+	width: 150px;
+
+	&:before {
+		height: 150px;
+		width: 150px;
+		top: 75px;
+		left: 0px;
+	}
+
+	&:after {
+		height: 150px;
+		width: 150px;
+		top: 0px;
+		left: 75px;
+	}
+`
+
+export const ModifiedLikeCount = styled(LikeCount)`
+	font-size: 5em;
 `

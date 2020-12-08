@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import {
 	PostActions,
@@ -22,7 +22,17 @@ function getCommentsCount(code) {
 	return commentSize;
 }
 
-const Post = ({ code, caption, likes, id, display_src }) => {
+function Post ({ code, caption, likes, id, display_src }) {
+
+	const [showLikeStatus, setShowLikeStatus] = useState(false);
+
+	function handlePostLike() {
+		setShowLikeStatus(true);
+		setTimeout(() => {
+			setShowLikeStatus(false);
+		}, 1000);
+	}
+
 	return (
 		<>
 			<PostCard>
@@ -40,13 +50,16 @@ const Post = ({ code, caption, likes, id, display_src }) => {
 							alt="Post thumbnail"
 							width={'100%'}
 							height={'auto'}
+							onDoubleClick={handlePostLike}
 						>
 						</PostThumb>
-						<LikeOverlay>
-							<LikeAnimatedIcon>
-								<LikeCount>{ likes }</LikeCount>
-							</LikeAnimatedIcon>
-						</LikeOverlay>
+						{showLikeStatus && 
+							<LikeOverlay>
+								<LikeAnimatedIcon>
+									<LikeCount>{ likes }</LikeCount>
+								</LikeAnimatedIcon>
+							</LikeOverlay>
+						}
 					</div>
 				</Link>
 				<PostDescription>
@@ -58,6 +71,7 @@ const Post = ({ code, caption, likes, id, display_src }) => {
 							fontIcon={"💙"}
 							buttonText={likes}
 							title="Like"
+							onClick={handlePostLike}
 							style={{
 								margin: '0.5em 0.5em 0.5em 0'
 							}}
