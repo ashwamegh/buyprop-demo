@@ -34,7 +34,67 @@ export const PostCard = styled(ColumnFlex)`
 	}
 `
 
-export const PostThumb = styled.img``
+export const PostThumb = styled.img`
+	position: relative;
+`
+
+export const LikeOverlay = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.4);
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+`
+
+export const LikeAnimatedIcon = styled.div`
+	height: 100px;
+	width: 100px;
+	transform: rotate(-135deg);
+	background: #fff;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0.9;
+
+	&:before {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		height: 100px;
+		width: 100px;
+		background: #fff;
+		top: 50px;
+		left: 0px;
+	}
+
+	&:after {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		height: 100px;
+		width: 100px;
+		background: #fff;
+		top: 0px;
+		left: 50px;
+	}
+`
+
+export const LikeCount = styled.span`
+	position: absolute;
+	transform: rotate(135deg);
+	height: 100%;
+	width: 100%;
+	z-index: 10;
+	text-align: center;
+	font-size: 3em;
+	font-weight: 500;
+`
 
 export const PostDescription = styled(ColumnFlex)`
 	padding: 1em;

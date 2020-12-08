@@ -4,7 +4,10 @@ import {
 	PostActions,
 	PostCard,
 	PostDescription,
-	PostThumb
+	PostThumb,
+	LikeOverlay,
+	LikeAnimatedIcon,
+	LikeCount
 } from './styled';
 import Button from './../components/buttons';
 import comments from './../comments/data';
@@ -31,13 +34,20 @@ const Post = ({ code, caption, likes, id, display_src }) => {
 						}
 					}}
 				>
-					<PostThumb
-						src={ display_src }
-						alt="Post thumbnail"
-						width={'100%'}
-						height={'auto'}
-					>
-					</PostThumb>
+					<div style={{ position: 'relative' }}>
+						<PostThumb
+							src={ display_src }
+							alt="Post thumbnail"
+							width={'100%'}
+							height={'auto'}
+						>
+						</PostThumb>
+						<LikeOverlay>
+							<LikeAnimatedIcon>
+								<LikeCount>{ likes }</LikeCount>
+							</LikeAnimatedIcon>
+						</LikeOverlay>
+					</div>
 				</Link>
 				<PostDescription>
 					<p>
