@@ -1,4 +1,4 @@
-# ButProperly Demo
+# BuyProperly Demo
 
 > Solutions for the challenges posted here: https://github.com/rajivkr/challenge
 
